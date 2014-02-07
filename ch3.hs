@@ -99,4 +99,11 @@ intersperse' s [] = []
 intersperse' s (x:[]) = x
 intersperse' s (x:xs) = x ++ [s] ++ (intersperse' s xs)
 
+-- data Tree a = Node a (Tree a) (Tree a)
+--             | EmptyNode
+--             deriving (Show, Eq)
 
+treeHeight EmptyNode = 0
+treeHeight (Node a l r) = 1 + (max leftHeight rightHeight)
+  where leftHeight = treeHeight l
+        rightHeight = treeHeight r
