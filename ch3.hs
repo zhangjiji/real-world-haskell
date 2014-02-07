@@ -93,3 +93,10 @@ isPalindrome xs
 
 lengthLT a b = length a `compare` length b
 sortByLength = sortBy lengthLT
+
+intersperse' :: a -> [[a]] -> [a]
+intersperse' s [] = []
+intersperse' s (x:[]) = x
+intersperse' s (x:xs) = x ++ [s] ++ (intersperse' s xs)
+
+
