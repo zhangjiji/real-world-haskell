@@ -107,3 +107,16 @@ treeHeight EmptyNode = 0
 treeHeight (Node a l r) = 1 + (max leftHeight rightHeight)
   where leftHeight = treeHeight l
         rightHeight = treeHeight r
+
+data Direction = TurnLeft | TurnRight | GoStraight
+               deriving (Show)
+
+calculateDirection :: Vector -> Vector -> Vector -> Direction
+calculateDirection v1 v2 v3 =
+  let c = ((subtract v1 v2) `crossProduct` (subtract v2 v3))
+  in case c `compare` 0 of
+    EQ -> GoStraight
+    LT -> TurnRight
+    GT -> TurnLeft
+  where crossProduct (x1,y1) (x2, y2) = x1 * y2 - x2 * y1
+        subtract (x1, y1) (x2, y2) = (x2-x1, y2-y1)
