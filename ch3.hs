@@ -1,4 +1,6 @@
--- ch3/ch3.hs
+-- ch3
+
+import Data.List
 
 -- data and type
 data BookInfo = Book BookID BookName BookAuthors
@@ -88,3 +90,6 @@ isPalindrome [] = True
 isPalindrome xs
   | length xs == 1 = True
   | otherwise = (head xs == last xs) && (isPalindrome . init . tail $ xs)
+
+lengthLT a b = length a `compare` length b
+sortByLength = sortBy lengthLT
