@@ -85,4 +85,6 @@ palindrome [] = []
 palindrome xs = xs ++ (reverse xs)
 
 isPalindrome [] = True
-
+isPalindrome xs
+  | length xs == 1 = True
+  | otherwise = (head xs == last xs) && (isPalindrome . init . tail $ xs)
