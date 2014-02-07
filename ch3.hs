@@ -35,3 +35,6 @@ fromList (x:xs) = Cons x (fromList xs)
 
 toList Nil = []
 toList (Cons a t) = a:(toList t)
+
+data MyTree a = TreeNode (Maybe a) (Maybe (MyTree a)) (Maybe (MyTree a))
+              deriving (Show)
