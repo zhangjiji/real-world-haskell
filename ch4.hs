@@ -72,6 +72,12 @@ id (f (f z x2) x1)
 -}
 
 asInt :: String -> Int
+asInt "" = error "empty"
+asInt "-" = error "only minus?"
 asInt ('-':ss) = (-(asInt ss))
-asInt ss = foldl step 0 ss
+asInt ss
+  | '.' `elem` ss = error "dot"
+  | length ss > 20 = error "too long"
+  | otherwise = foldl step 0 ss
   where step acc x = (digitToInt x) + acc * 10
+
