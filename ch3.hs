@@ -109,7 +109,7 @@ treeHeight (Node a l r) = 1 + (max leftHeight rightHeight)
         rightHeight = treeHeight r
 
 data Direction = TurnLeft | TurnRight | GoStraight
-               deriving (Show)
+               deriving (Show, Eq)
 
 calculateDirection :: Vector -> Vector -> Vector -> Direction
 calculateDirection v1 v2 v3 =
@@ -128,3 +128,22 @@ listDirections xs
                     b = last (take 2 xs)
                     c = last (take 3 xs)
                 in (calculateDirection a b c) : (listDirections (tail xs))
+
+grahamScan :: [Vector] -> [Vector]
+grahamScan [] = []
+grahamScan xs =
+  let sorted = sortBy yxLT xs
+  in scan' sorted
+  where yxLT (x1,y1) (x2,y2)
+          | y1 < y2 = LT
+          | y1 == y2 && x1 < x2 = LT
+          | y1 == y2 && x1 == x2 = EQ
+          | otherwise = GT
+        scan' [] = []
+        scan' (a:[]) = a:[]
+        scan' (a:b:[]) = a:b:[]
+        scan' (a:b:c:xs) =
+          let dir = calculateDirection a b c
+          in if dir == TurnRight
+             then scan' (a:c:xs)
+             else a:(scan' (b:c:xs))
