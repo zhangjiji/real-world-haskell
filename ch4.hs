@@ -72,5 +72,6 @@ id (f (f z x2) x1)
 -}
 
 asInt :: String -> Int
+asInt ('-':ss) = (-(asInt ss))
 asInt ss = foldl step 0 ss
   where step acc x = (digitToInt x) + acc * 10
