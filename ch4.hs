@@ -93,4 +93,4 @@ asInt' ss
   where step acc x = (digitToInt x) + acc * 10
 
 concat' :: [[a]] -> [a]
-concat' xs = foldl (++) [] xs
+concat' xs = foldr (++) [] xs
