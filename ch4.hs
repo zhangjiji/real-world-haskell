@@ -1,4 +1,7 @@
 
+import System.Environment (getArgs)
+    
+
 safeHead [] = Nothing
 safeHead xs = Just (head xs)
 
@@ -19,3 +22,22 @@ splitWith p xs =
   in if null h
      then [head t] : splitWith p (tail t)
      else h:(splitWith p t)
+
+interactWith function inputFile outputFile = do
+  input <- readFile inputFile
+  writeFile outputFile (function input)
+
+main = mainWith myFunction
+  where mainWith function = do
+          args <- getArgs
+          case args of
+            [input, output] -> interactWith function input output
+            _ -> putStrLn "error: exactly two arguments needed"
+
+        myFunction = getFirstWords
+
+getFirstWords :: String -> String
+getFirstWords "" = ""
+getFirstWords ts =
+  let (x:xs) = lines ts
+  in (head . words $ x) ++ "\n" ++ (getFirstWords (unlines xs))
