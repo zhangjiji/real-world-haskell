@@ -100,3 +100,8 @@ takeWhile' p xs = foldr step [] xs
   where step x acc
           | p x = x:acc
           | otherwise = []
+
+takeWhileDirect _ [] = []
+takeWhileDirect p (x:xs)
+  | p x = x: takeWhileDirect p xs
+  | otherwise = []
