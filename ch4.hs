@@ -1,6 +1,6 @@
 
 import System.Environment (getArgs)
-    
+import Data.Char    
 
 safeHead [] = Nothing
 safeHead xs = Just (head xs)
@@ -51,3 +51,26 @@ transposeLists (x:xs) = zipWith (++) (transposeList x) (transposeLists xs)
 
 transposeFile :: String -> String
 transposeFile = unlines . transposeLists . lines
+
+myMap _ [] = []
+myMap f xs = foldr step [] xs
+  where step y acc = f y : acc
+
+-- headache pills
+foldl'' f z xs = foldr step id xs z
+  where step x g a = g (f a x)
+
+{-
+foldr _ [] = []
+foldr f z (x:xs) = f x : (foldr f z xs)
+
+foldl'' f z [x1,x2] -->
+step x1 (step x2 (step id [])) -->
+step x1 id (f z x2) -->
+id (f (f z x2) x1)
+        acc
+-}
+
+asInt :: String -> Int
+asInt ss = foldl step 0 ss
+  where step acc x = (digitToInt x) + acc * 10
