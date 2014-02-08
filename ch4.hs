@@ -41,3 +41,13 @@ getFirstWords "" = ""
 getFirstWords ts =
   let (x:xs) = lines ts
   in (head . words $ x) ++ "\n" ++ (getFirstWords (unlines xs))
+
+transposeList [] = []
+transposeList (x:xs) = [x]: (transposeList xs)
+
+transposeLists [] = []
+transposeLists (x:[]) = transposeList x
+transposeLists (x:xs) = zipWith (++) (transposeList x) (transposeLists xs)
+
+transposeFile :: String -> String
+transposeFile = unlines . transposeLists . lines
