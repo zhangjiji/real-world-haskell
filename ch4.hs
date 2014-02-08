@@ -92,3 +92,5 @@ asInt' ss
   | otherwise = Right (foldl step 0 ss)
   where step acc x = (digitToInt x) + acc * 10
 
+concat' :: [[a]] -> [a]
+concat' xs = foldl (++) [] xs
