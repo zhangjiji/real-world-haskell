@@ -94,3 +94,9 @@ asInt' ss
 
 concat' :: [[a]] -> [a]
 concat' xs = foldr (++) [] xs
+
+takeWhile' :: (a -> Bool) -> [a] -> [a]
+takeWhile' p xs = foldr step [] xs
+  where step x acc
+          | p x = x:acc
+          | otherwise = []
