@@ -81,3 +81,14 @@ asInt ss
   | otherwise = foldl step 0 ss
   where step acc x = (digitToInt x) + acc * 10
 
+asInt' :: String -> Either String Int
+asInt' "" = Left "empty"
+asInt' "-" = Left "only minus?"
+asInt' ('-':ss) = Right (-(asInt ss))
+asInt' ss
+  | '.' `elem` ss = Left "dot"
+  | length ss > 20 = Left "too long"
+  | not (all isDigit ss) = Left "not all digit"
+  | otherwise = Right (foldl step 0 ss)
+  where step acc x = (digitToInt x) + acc * 10
+
