@@ -127,4 +127,5 @@ words' xs = foldr step [""] xs
           | otherwise = (x:(head acc)) : (tail acc)
           
           
---unlines'
+unlines' xs = foldr step [] xs
+  where step x acc = (x ++ "\n")++acc
