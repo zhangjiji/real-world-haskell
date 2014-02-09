@@ -119,5 +119,12 @@ any' p xs = foldr step False xs
 
 cycle' xs = (foldr (:) [] xs) ++ (cycle' xs)
 
---words'
+words' xs = foldr step [""] xs
+  where step x acc
+          | isSpace x = if null (head acc)
+                        then acc
+                        else []:acc
+          | otherwise = (x:(head acc)) : (tail acc)
+          
+          
 --unlines'
