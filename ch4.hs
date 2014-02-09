@@ -114,3 +114,6 @@ groupBy' p xs = foldr step [[]] xs
              then [x:a]
              else [x]:as'
 
+any' p xs = foldr step False xs
+  where step x acc = p x || acc
+
