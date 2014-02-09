@@ -117,3 +117,7 @@ groupBy' p xs = foldr step [[]] xs
 any' p xs = foldr step False xs
   where step x acc = p x || acc
 
+cycle' xs = (foldr (:) [] xs) ++ (cycle' xs)
+
+--words'
+--unlines'
