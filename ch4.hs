@@ -105,3 +105,12 @@ takeWhileDirect _ [] = []
 takeWhileDirect p (x:xs)
   | p x = x: takeWhileDirect p xs
   | otherwise = []
+
+groupBy' p xs = foldr step [[]] xs
+  where step x [[]] = [[x]]
+        step x as'@(a:as) =
+          let h = head a
+          in if p x h
+             then [x:a]
+             else [x]:as'
+
