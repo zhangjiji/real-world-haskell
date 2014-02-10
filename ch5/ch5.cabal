@@ -1,0 +1,11 @@
+Name: ch5
+Version: 0.1
+
+Synopsis: JSON pretty printer
+Author: zhangjiji
+Maintainer: Nobody
+
+Cabal-Version: >= 1.2
+
+library
+	Exposed-Modules:  
