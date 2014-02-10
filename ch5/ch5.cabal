@@ -8,4 +8,8 @@ Maintainer: Nobody
 Cabal-Version: >= 1.2
 
 library
-	Exposed-Modules:  
+ Exposed-Modules:
+  SimpleJSON
+  PrettyJSON
+  Prettify
+ Build-Depends:	 base >= 2.0
