@@ -1,7 +1,7 @@
 
 
-main = do
-  putStrLn "What is your name?:"
-  str <- getLine
-  putStrLn $ "Hello" ++ str
+main =
+  putStrLn "What is your name?:" >>
+  getLine >>=
+  putStrLn . ("Hello" ++)
   

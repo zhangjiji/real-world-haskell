@@ -1,0 +1,13 @@
+import System.IO
+import Data.Char(toUpper)
+
+main =
+  do
+    inh <- openFile "input.txt" ReadMode
+    outh <- openFile "output.txt" WriteMode
+
+    str <- hGetContents inh
+    hPutStr outh (map toUpper str)
+    
+    hClose inh
+    hClose outh
