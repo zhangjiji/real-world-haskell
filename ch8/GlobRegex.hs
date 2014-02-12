@@ -1,6 +1,6 @@
 module GlobRegex (
   globToRegex,
---  matchGlob
+  matchesGlob
   ) where
 
 import Text.Regex.Posix((=~))
@@ -28,8 +28,8 @@ charClass (']':cs) = ']' : globToRegex' cs
 charClass (c:cs) = c : charClass cs
 charClass [] = error "unterminated"
 
-metchesGlob :: FilePath -> String -> Bool
-name `metchesGlob` pat = name =~ globToRegex pat
+matchesGlob :: FilePath -> String -> Bool
+name `matchesGlob` pat = name =~ globToRegex pat
 
-iMetchesGlob :: FilePath -> String -> Bool
-name `iMetchesGlob` pat = (map toLower name) `metchesGlob` (map toLower pat)
+iMatchesGlob :: FilePath -> String -> Bool
+name `iMatchesGlob` pat = (map toLower name) `matchesGlob` (map toLower pat)
