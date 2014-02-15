@@ -59,15 +59,21 @@ myTest2 = (liftPath takeExtension ==? ".hs") &&? (sizeP >? 131072)
 
 (==?) :: (Eq a) => InfoP a -> a -> InfoP Bool
 (==?) = equalP
+infix 4 ==?
+
 
 (&&?) :: InfoP Bool -> InfoP Bool -> InfoP Bool
 (&&?) = andP
+infix 3 &&?
 
 (||?) :: InfoP Bool -> InfoP Bool -> InfoP Bool
 (||?) = orP
+infix 2 ||?
 
 (>?) :: (Ord a) => InfoP a -> a -> InfoP Bool
 (>?) = greaterP
+infix 4 >?
 
 (<?) :: (Ord a) => InfoP a -> a -> InfoP Bool
 (<?) = lesserP
+infix 4 <?
