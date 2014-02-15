@@ -79,3 +79,4 @@ infix 4 >?
 (<?) :: (Ord a) => InfoP a -> a -> InfoP Bool
 (<?) = lesserP
 infix 4 <?
+

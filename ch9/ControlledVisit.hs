@@ -41,3 +41,13 @@ getUsefulContents path = do
 
 isDirectory :: Info -> Bool
 isDirectory = maybe False searchable . infoPerms
+
+preOrder = id
+postOrder (x:xs) = xs ++ [x]
+
+-- P228 ex3, Take the predicates and combinators from "Gluing Predicates Together" on page 224 and make them work with our new Info type.
+
+infoEq :: (Eq a) => (Info -> a) -> a -> Info -> Bool
+infoEq accessF k x = accessF x == k
+
+-- P228 ex4, Write a wrapper for traverse that lets you control traversal using one predicate and filter results using another.
