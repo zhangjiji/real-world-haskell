@@ -55,4 +55,19 @@ orP = liftP2 (||)
 liftPath :: (FilePath -> a) -> InfoP a
 liftPath f w _ _ _ = f w
 
-myTest2 = (liftPath takeExtension `equalP` ".hs") `andP` (sizeP `lesserP` 131072)
+myTest2 = (liftPath takeExtension ==? ".hs") &&? (sizeP >? 131072)
+
+(==?) :: (Eq a) => InfoP a -> a -> InfoP Bool
+(==?) = equalP
+
+(&&?) :: InfoP Bool -> InfoP Bool -> InfoP Bool
+(&&?) = andP
+
+(||?) :: InfoP Bool -> InfoP Bool -> InfoP Bool
+(||?) = orP
+
+(>?) :: (Ord a) => InfoP a -> a -> InfoP Bool
+(>?) = greaterP
+
+(<?) :: (Ord a) => InfoP a -> a -> InfoP Bool
+(<?) = lesserP
