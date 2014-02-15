@@ -6,7 +6,7 @@ import System.Directory (Permissions(..), getModificationTime, getPermissions)
 import Data.Time.Clock (UTCTime)
 import System.FilePath (takeExtension)
 import System.IO (openFile, hClose, hFileSize, IOMode(..))
-import Control.Exception (bracket, handle)
+import Control.Exception (bracket, handle, SomeException)
 
 import RecursiveContents (getRecursiveContents)
 
@@ -19,9 +19,11 @@ betterFind p path = getRecursiveContents path >>= filterM check
                             return (p name perms size modified)
 
 getFileSize :: FilePath -> IO (Maybe Integer)
-getFileSize path = {-handle (\_ -> return Nothing) $-} bracket (openFile path ReadMode) hClose $ \x -> do
+getFileSize path = handle handler $ bracket (openFile path ReadMode) hClose $ \x -> do
   size <- hFileSize x
   return (Just size)
+  where handler :: SomeException -> IO (Maybe Integer)
+        handler _ = return Nothing
 
 type InfoP a = FilePath
                -> Permissions
